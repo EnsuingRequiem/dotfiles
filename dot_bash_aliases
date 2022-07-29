@@ -1,0 +1,2 @@
+alias gittree='tree -a --gitignore'
+alias ls='ls -AlF --color=auto'
