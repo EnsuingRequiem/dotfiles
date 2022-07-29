@@ -19,11 +19,35 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=5000
 setopt autocd notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
+setopt appendHistory
+setopt shareHistory
 
-. /usr/share/powerline/bindings/zsh/powerline.zsh
+if [[ -f /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
+  source /usr/share/powerline/bindings/zsh/powerline.zsh
+fi
+if [[ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+  source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+if [[ -f /usr/local/bin/kubectl ]] || [[ -f /usr/bin/kubectl ]]; then
+    source <(kubectl completion zsh)
+fi
+if [[ -f /usr/local/bin/minikube ]] || [[ -f /usr/bin/minikube ]]; then
+    source <(minikube completion zsh)
+fi
+if [[ -f /usr/local/bin/chezmoi ]] || [[ -f /usr/bin/chezmoi ]]; then
+    source <(chezmoi completion zsh)
+fi
+
+# Keep this one last
+if [[ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10,underline'
+fi
