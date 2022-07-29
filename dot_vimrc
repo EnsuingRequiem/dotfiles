@@ -32,3 +32,8 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
   \| exe "normal! g`\"" | endif
 endif
+
+" Add filetype handling for chezmoi templates
+autocmd BufNewFile,BufRead *.yaml.tmpl set filetype=yaml
+autocmd BufNewFile,BufRead *.toml.tmpl set filetype=toml
+autocmd BufNewFile,BufRead *.json.tmpl set filetype=json
