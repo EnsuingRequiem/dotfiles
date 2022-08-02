@@ -28,6 +28,9 @@ bindkey -v
 setopt appendHistory
 setopt shareHistory
 
+if [[ -f ~/.zsh_aliases ]]; then
+    source ~/.zsh_aliases
+fi
 if [[ -f /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
   source /usr/share/powerline/bindings/zsh/powerline.zsh
 fi
@@ -43,6 +46,9 @@ if [[ -f /usr/local/bin/minikube ]] || [[ -f /usr/bin/minikube ]]; then
 fi
 if [[ -f /usr/local/bin/chezmoi ]] || [[ -f /usr/bin/chezmoi ]]; then
     source <(chezmoi completion zsh)
+fi
+if [[ -f /etc/zsh_command_not_found ]]; then
+    source /etc/zsh_command_not_found
 fi
 
 # Keep this one last

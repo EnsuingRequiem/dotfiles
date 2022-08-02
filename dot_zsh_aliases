@@ -1,0 +1,3 @@
+alias gittree='tree -a --gitignore'
+alias ls='ls -AlF --color=auto'
+alias md='mkdir -p'
