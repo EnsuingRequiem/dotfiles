@@ -1,21 +1,54 @@
 set nocompatible     " required for vundle
 filetype off         " required for vundle
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'zdharma-continuum/zinit-vim-syntax'
+Plug 'pedrohdz/vim-yaml-folds'
+Plug 'Yggdroot/indentLine'
+if !has('nvim')
+    Plug 'rhysd/vim-healthcheck'
+endif
+Plug 'dense-analysis/ale'
+call plug#end()    " make sure all plugins are before here
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
-call vundle#end()    " make sure all plugins are before here
 filetype plugin indent on
 syntax on
 set background=dark
 colorscheme solarized
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set relativenumber
+set scrolloff=5
+" Mappings
+
+" If at the end of file, j moves line up visually
+nnoremap <expr> j line(".") == line('$') ? '<C-e>':'j'
+
+" Emulate scrolloff=5 when jumping to end
+nnoremap G G5<C-e>
+
+" maps leader to space for the following map
+let mapleader = " "
+" maps <sp> w to perform windows actions (Ctrl W)
+nnoremap <leader>w <C-w>
+
+" restores leader to \
+let mapleader = "\\"
+
+" fixes inpde issues with vim
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
 
 " Airline configurations
 let g:airline_theme='solarized'
@@ -24,16 +57,47 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#formatter='unique_tail_improved'
 let g:airline_powerline_fonts=1
 
-set shiftwidth=4
-set tabstop=4
-set expandtab
 
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
   \| exe "normal! g`\"" | endif
 endif
 
+" Configure indentLine
+let g:indentLine_char = '▏'
+let g:indentLine_char_list = ['│', '╎', '┆', '┊']
+
+" Configure folds
+set foldlevelstart=20
+hi Folded ctermbg=0 cterm=NONE ctermfg=7
+
+" guard for distributions lacking the 'persistent_undo' feature.
+if has('persistent_undo')
+    " define a path to store persistent undo files.
+    let target_path = expand('~/.config/vim-persisted-undo/')    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call system('mkdir -p ' . target_path)
+    endif    " point Vim to the defined undo directory.
+    let &undodir = target_path    " finally, enable undo persistence.
+    set undofile
+endif
+
 " Add filetype handling for chezmoi templates
 autocmd BufNewFile,BufRead *.yaml.tmpl set filetype=yaml
 autocmd BufNewFile,BufRead *.toml.tmpl set filetype=toml
 autocmd BufNewFile,BufRead *.json.tmpl set filetype=json
+
+" Yaml configs
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" ALE Settings
+set signcolumn=number
+set number
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%s]'
+let g:ale_sign_error = '✘'
+highlight ALEErrorSign ctermfg=1
+let g:ale_sign_warning = '⚠'
+highlight ALEWarningSign ctermfg=3
+let g:ale_sign_highlight_linenrs = 1
