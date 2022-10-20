@@ -1,0 +1,12 @@
+. "$HOME/.cargo/env"
+# Custom functions for helping with docker envs
+gen_pass() {
+    bw generate --words 3 --includeNumber -pc
+}
+gen_secret() {
+    if [[ $1 =~ ^[0-9]+$ ]]; then
+        echo "$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $1 | head -c$1)"
+    else
+        echo "$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -c32)"
+    fi
+}
