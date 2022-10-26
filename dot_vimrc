@@ -45,11 +45,18 @@ nnoremap G G5<C-e>
 
 " maps leader to space for the following map
 let mapleader = " "
-" maps <sp> w to perform windows actions (Ctrl W)
+" maps <sp> w to perform windows actions (Ctrl W) to avoid closing window
 nnoremap <leader>w <C-w>
-
+" maps <sp> t to perform Ctrl T to avoid opening new browser tabs
+nnoremap <leader>t <C-t>
 " restores leader to \
 let mapleader = "\\"
+
+" Make resizing easier
+nnoremap <C-w><Left> <C-w><
+nnoremap <C-w><Right> <C-w>>
+nnoremap <C-w><Up> <C-w>+
+nnoremap <C-w><Down> <C-w>-
 
 " fixes inpde issues with vim
 set backupdir=~/.vim/backup//
@@ -72,6 +79,8 @@ endif
 " Configure indentLine
 let g:indentLine_char = '▏'
 let g:indentLine_char_list = ['│', '╎', '┆', '┊']
+" fix issue with hidden json quotes when using indentline
+let g:vim_json_conceal = 0
 
 " Configure folds
 set foldlevelstart=20
