@@ -120,20 +120,6 @@ zinit wait lucid for \
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="underline"
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
-export NFS_SVC_DIR=/mnt/freenas/data/docker-services
-export VELOX_SVC_DIR=/velox/dev-docker
-export SHARED_DATA_DIR=/home/levi/docker/shared-data
-export SECRETS_DIR=/home/levi/docker/shared-data/secrets
-export SVC_DATA_DIR=/home/levi/docker/service-data
-export CERTS_DIR=/home/levi/docker/shared-data/certs
-export POSTGRES_DIR=/home/levi/docker/service-data/postgres
-export MARIADB_DIR=/home/levi/docker/service-data/mariadb
-export VELOX_REDIS_DIR=/velox/dev-docker/redis
-export REDIS_DIR=/home/levi/docker/service-data/redis
-export NGINX_DIR=/home/levi/docker/service-data/nginx
-export ELASTICSEARCH_DIR=/home/levi/docker/service-data/elasticsearch
-export VELOX_PG_WAL=/velox/pg_wal
-export VELOX_PG_DATA=/velox/pg_data
 
 export BAT_THEME="Solarized (dark)"
 
