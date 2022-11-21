@@ -50,6 +50,9 @@ fi
 if [[ -f /usr/local/bin/chezmoi ]] || [[ -f /usr/bin/chezmoi ]]; then
     source <(chezmoi completion zsh)
 fi
+if [[ -f /usr/local/bin/yq ]] || [[ -f /usr/bin/yq ]]; then
+    source <(yq completion zsh)
+fi
 if [[ -f /etc/zsh_command_not_found ]]; then
     source /etc/zsh_command_not_found
 fi

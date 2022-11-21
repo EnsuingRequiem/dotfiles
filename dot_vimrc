@@ -13,11 +13,18 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'SirVer/ultisnips'
+Plug 'preservim/nerdtree'
+Plug 'valloric/youcompleteme'
 Plug 'zdharma-continuum/zinit-vim-syntax'
 Plug 'pedrohdz/vim-yaml-folds'
+Plug 'inkarkat/vim-AdvancedSorters'
+Plug 'inkarkat/vim-ingo-library'
 Plug 'Yggdroot/indentLine'
 if !has('nvim')
     Plug 'rhysd/vim-healthcheck'
@@ -47,8 +54,12 @@ nnoremap G G5<C-e>
 let mapleader = " "
 " maps <sp> w to perform windows actions (Ctrl W) to avoid closing window
 nnoremap <leader>w <C-w>
+nnoremap <leader>W <C-W>
 " maps <sp> t to perform Ctrl T to avoid opening new browser tabs
 nnoremap <leader>t <C-t>
+
+" maps NERDTree commands
+
 " restores leader to \
 let mapleader = "\\"
 
@@ -116,3 +127,6 @@ highlight ALEErrorSign ctermfg=1
 let g:ale_sign_warning = '⚠'
 highlight ALEWarningSign ctermfg=3
 let g:ale_sign_highlight_linenrs = 1
+
+" YouCompleteMe Settings
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
