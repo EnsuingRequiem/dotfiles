@@ -30,6 +30,9 @@ if !has('nvim')
     Plug 'rhysd/vim-healthcheck'
 endif
 Plug 'dense-analysis/ale'
+Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
+Plug 'freitass/todo.txt-vim'
+Plug 'zsh-users/zsh-syntax-highlighting'
 call plug#end()    " make sure all plugins are before here
 
 filetype plugin indent on
@@ -87,6 +90,12 @@ if has("autocmd")
   \| exe "normal! g`\"" | endif
 endif
 
+" Call mkdir before writing
+augroup Mkdir
+    autocmd!
+    autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
+augroup END
+
 " Configure indentLine
 let g:indentLine_char = '▏'
 let g:indentLine_char_list = ['│', '╎', '┆', '┊']
@@ -114,9 +123,6 @@ autocmd BufNewFile,BufRead *.yaml.tmpl set filetype=yaml
 autocmd BufNewFile,BufRead *.toml.tmpl set filetype=toml
 autocmd BufNewFile,BufRead *.json.tmpl set filetype=json
 
-" Yaml configs
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
 " ALE Settings
 set signcolumn=number
 set number
@@ -128,5 +134,16 @@ let g:ale_sign_warning = '⚠'
 highlight ALEWarningSign ctermfg=3
 let g:ale_sign_highlight_linenrs = 1
 
+" Yaml configs
+autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
+
 " YouCompleteMe Settings
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_use_ultisnips_completer = 1
+" let g:ycm_key_list_select_completion=['<tab>', '<Down>']
+" let g:ycm_key_list_previous_completion=['<S-tab>', '<Up>']
+
+let g:UltiSnipsExpandTrigger = '<c-l>'
+let g:UltiSnipsJumpForwardTrigger= '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsEditSplit = 'context'

@@ -29,7 +29,7 @@ setopt appendHistory
 setopt shareHistory
 setopt interactivecomments
 
-export PATH=~/.local/bin:$PATH
+export PATH=~/go/bin:~/.local/bin:$PATH
 
 if [[ -f ~/.zsh_aliases ]]; then
     source ~/.zsh_aliases
@@ -125,4 +125,4 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="underline"
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
 
 export BAT_THEME="Solarized (dark)"
-
+source /tachy/docker/.env
